@@ -5,7 +5,8 @@ describe('MisfitStrategy', function() {
      
     before(function(done) {
         this.strategy = new MisfitStrategy(
-            {clientID: '12345', clientSecret: 'secret'}
+            {clientID: '12345', clientSecret: 'secret'},
+            function () {}
         );
         done();
     });
