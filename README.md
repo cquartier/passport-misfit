@@ -13,12 +13,19 @@ See https://build.misfit.com/ for developer portal. You must apply for API acces
 
 #### Configure Strategy
 
+`clientID`, `clientSecret`, `callbackURL`, and `scope` are all required. According to Misfit documentation, setting scope to `public, birthday, email` will request all permissions for now.
+
 **note**: Misfit currently does not provide a refreshToken in its response. It will be `undefined`
 
     passport.use(new MisfitStrategy({
         clientID: YOUR_MISFIT_APP_ID,
         clientSecret: YOUR_MISFIT_APP_SECRET,
-        callbackURL: "http://localhost:3000/auth/misfit/callback"
+        callbackURL: "http://localhost:3000/auth/misfit/callback",
+        scope: [
+            'public',
+            'birthday',
+            'email'
+        ]
       },
       function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({ misfitUserId: profile.userId }, function (err, user) {
